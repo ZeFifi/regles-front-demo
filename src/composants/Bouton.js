@@ -8,7 +8,6 @@ export function Bouton(libelle, onClick) {
   const bouton = document.createElement("button");
   bouton.type = "button";
   bouton.className = "bouton";
-  console.log("cool")
   bouton.textContent = libelle;
   bouton.addEventListener("click", () => {
     onClick();
