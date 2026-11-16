@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--couleur-fond);
+  color: var(--couleur-texte);
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(var(--espace) * 2) var(--espace);
+}
+
+.catalogue {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--espace);
+}
+
+.carte {
+  display: grid;
+  gap: 8px;
+  padding: var(--espace);
+  background: var(--couleur-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon);
+}
+
+.carte-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: calc(var(--rayon) / 2);
+}
+
+.bouton {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: var(--rayon);
+  background: var(--couleur-accent);
+  color: var(--couleur-accent-texte);
+  font: inherit;
+  cursor: pointer;
+}
+
+.bouton:hover {
+  background: var(--couleur-accent-survol);
+}

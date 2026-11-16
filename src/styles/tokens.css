@@ -1,0 +1,11 @@
+:root {
+  --couleur-fond: #faf7f2;
+  --couleur-texte: #2b211a;
+  --couleur-accent: #3466c0;
+  --couleur-accent-survol: #2a55a3;
+  --couleur-accent-texte: #fff;
+  --couleur-carte: #fff;
+  --couleur-bordure: #e4ddd2;
+  --rayon: 12px;
+  --espace: 16px;
+}
