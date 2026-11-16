@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+# pre-commit : refuse le commit si les fichiers indexés ne passent pas les contrôles du projet.
+# Git le lance avant chaque commit, que le commit vienne de vous ou d'un agent.
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+bin="node_modules/.bin"
+echec=0
+
+# Vrai si le commit contient au moins un fichier qui correspond aux motifs donnés
+indexe() { ! git diff --cached --quiet --diff-filter=ACMR -- "$@"; }
+# Liste ces fichiers, séparés par un caractère nul (les noms avec espaces passent)
+liste() { git diff --cached --name-only -z --diff-filter=ACMR -- "$@"; }
+
+# 1. Commentaires de contournement ajoutés dans le code de ce commit
+set -- '*.js' '*.jsx' '*.mjs' '*.cjs' '*.ts' '*.tsx' '*.vue' '*.svelte' '*.astro' '*.css' '*.scss' '*.sass' '*.less'
+if git diff --cached -U0 --diff-filter=ACMR -- "$@" | grep -nE '^\+.*((eslint|stylelint)-disable|@ts-(ignore|nocheck|expect-error))'; then
+  echo "Commentaire de contournement ajouté ci-dessus."
+  echec=1
+fi
+
+# 2. ESLint sur les scripts et les composants
+set -- '*.js' '*.jsx' '*.mjs' '*.cjs' '*.ts' '*.tsx' '*.vue' '*.svelte' '*.astro'
+if [ -x "$bin/eslint" ] && indexe "$@"; then
+  liste "$@" | xargs -0 "$bin/eslint" --no-warn-ignored --max-warnings 0 || echec=1
+fi
+
+# 3. Stylelint sur les feuilles de style et les composants
+set -- '*.css' '*.scss' '*.sass' '*.less' '*.vue' '*.svelte' '*.astro'
+if [ -x "$bin/stylelint" ] && indexe "$@"; then
+  liste "$@" | xargs -0 "$bin/stylelint" --allow-empty-input || echec=1
+fi
+
+# 4. TypeScript sur tout le projet : un fichier seul ne voit pas ses imports
+if [ -x "$bin/tsc" ] && [ -f tsconfig.json ] && indexe '*.ts' '*.tsx' '*.vue'; then
+  "$bin/tsc" --noEmit -p . || echec=1
+fi
+
+if [ "$echec" -ne 0 ]; then
+  echo ""
+  echo "Commit refusé : corrigez le code signalé ci-dessus."
+  echo "Ne désactivez aucune règle, ne modifiez pas la configuration des outils et n'ajoutez aucun commentaire de contournement."
+  exit 1
+fi
+exit 0
