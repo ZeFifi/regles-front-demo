@@ -1,0 +1,28 @@
+{
+  "name": "regles-front-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Projet d'exemple de l'article CodeCodeCoders « Vos règles front ne bloquent rien » (état de départ).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "prepare": "git config core.hooksPath .githooks",
+    "typecheck": "tsc --noEmit -p .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
+    "eslint": "10.1.0",
+    "eslint-plugin-jsdoc": "^65.4.9",
+    "jsdom": "^29.1.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "6.0.2",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^6.3.5",
+    "vitest": "^4.1.12"
+  }
+}
