@@ -1,0 +1,8 @@
+# Toute modification de ces fichiers demande votre relecture avant la fusion
+/eslint.config.*      @ZeFifi
+/.stylelintrc*        @ZeFifi
+/stylelint.config.*   @ZeFifi
+/tsconfig*.json       @ZeFifi
+/.githooks/           @ZeFifi
+/scripts/controls.sh  @ZeFifi
+/.github/             @ZeFifi
