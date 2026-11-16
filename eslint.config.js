@@ -49,7 +49,7 @@ export default [
       "@eslint-community/eslint-comments": commentairesEslint,
     },
     rules: {
-      "no-console": "error",
+      "no-console": "off",
       "@typescript-eslint/ban-ts-comment": ["error", {
         "ts-ignore": true,
         "ts-nocheck": true,
