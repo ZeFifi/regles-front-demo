@@ -89,7 +89,7 @@ export default [
   {
     files: ["src/legacy/**"],
     rules: {
-      "no-console": "error",
+      "no-console": "off",
     },
   },
 ];

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
-# controles.sh : les contrôles du projet, lancés par la CI sur chaque pull request.
-# Usage : sh scripts/controles.sh [branche de référence, main par défaut]
+# controls.sh : les contrôles du projet, lancés par la CI sur chaque pull request.
+# Usage : sh scripts/controls.sh [branche de référence, main par défaut]
 # Les configurations ESLint et TypeScript sont lues sur la branche de référence :
 # une pull request qui les modifie ne peut pas s'en servir pour passer.
 
